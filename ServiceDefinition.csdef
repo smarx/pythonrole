@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceDefinition name="PackAndDeploy" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
+    <WorkerRole name="WorkerRole" vmsize="ExtraSmall">
+        <Startup>
+            <Task commandLine="installPython.cmd" executionContext="elevated">
+                <Environment>
+                    <Variable name="EMULATED">
+                        <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated" />
+                    </Variable>
+                    <Variable name="PYTHON_PATH">
+                        <RoleInstanceValue xpath="/RoleEnvironment/CurrentInstance/LocalResources/LocalResource[@name='python']/@path" />
+                    </Variable>
+                </Environment>
+            </Task>
+            <Task commandLine="installDependencies.cmd">
+                <Environment>
+                    <Variable name="PYTHON_PATH">
+                        <RoleInstanceValue xpath="/RoleEnvironment/CurrentInstance/LocalResources/LocalResource[@name='python']/@path" />
+                    </Variable>
+                </Environment>
+            </Task>
+        </Startup>
+        <Runtime>
+            <Environment>
+                <Variable name="ADDRESS">
+                    <RoleInstanceValue xpath="/RoleEnvironment/CurrentInstance/Endpoints/Endpoint[@name='HttpIn']/@address" />
+                </Variable>
+                <Variable name="PORT">
+                    <RoleInstanceValue xpath="/RoleEnvironment/CurrentInstance/Endpoints/Endpoint[@name='HttpIn']/@port" />
+                </Variable>
+                <Variable name="PYTHON_PATH">
+                    <RoleInstanceValue xpath="/RoleEnvironment/CurrentInstance/LocalResources/LocalResource[@name='python']/@path" />
+                </Variable>
+            </Environment>
+            <EntryPoint>
+                <ProgramEntryPoint commandLine="run.cmd" setReadyOnProcessStart="true" />
+            </EntryPoint>
+        </Runtime>
+        <Endpoints>
+            <InputEndpoint name="HttpIn" protocol="tcp" port="80" />
+        </Endpoints>
+        <LocalResources>
+            <LocalStorage name="python" cleanOnRoleRecycle="true" sizeInMB="1000" />
+        </LocalResources>
+    </WorkerRole>
+</ServiceDefinition>
