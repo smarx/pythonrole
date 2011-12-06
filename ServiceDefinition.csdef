@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ServiceDefinition name="PackAndDeploy" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
+<ServiceDefinition name="PythonRole" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
     <WorkerRole name="WorkerRole" vmsize="ExtraSmall">
         <Startup>
             <Task commandLine="installPython.cmd" executionContext="elevated">

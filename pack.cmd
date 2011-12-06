@@ -1,1 +1,1 @@
-cspack ServiceDefinition.csdef /out:PackAndDeploy.cspkg
+cspack ServiceDefinition.csdef /out:PythonRole.cspkg
