@@ -8,7 +8,7 @@ Usage
 specified in the `PORT` environment variable (and for best results when running
 locally, listen on the IP address specified in the `ADDRESS` environment
 variable.
-2. Run `build.cmd & run.cmd` to build and run the application locally. When
+2. Run `run.cmd` to build and run the application locally. When
 running locally, python.exe must be in the path. (It is not automatically
 installed as it is in the cloud.)
 3. Run `pack.cmd` to output `PackAndRun.cspkg`. That file, along with
