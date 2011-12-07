@@ -5,4 +5,4 @@ if "%ServiceHostingSDKInstallPath%" == "" (
 )
 cspack ServiceDefinition.csdef /copyOnly /out:PythonRole.csx
 csrun PythonRole.csx ServiceConfiguration.Local.cscfg
-if "%ERRORLEVEL%"=="0" ( echo Browse to the port you see above to view the app. To stop all running apps, use "csrun /removeAll" )
+if "%ERRORLEVEL%"=="0" ( echo Browse to the port you see above to view the app. To stop the compute emulator, use "csrun /devfabric:shutdown" )
